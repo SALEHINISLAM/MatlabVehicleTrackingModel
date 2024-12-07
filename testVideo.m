@@ -2,7 +2,7 @@
 load('vehicleClassifier.mat'); % Contains 'classifier', 'cellSize', 'targetSize'
 
 % Specify the path to your video file
-videoFile = 'yolotestforsir.mkv'; % Replace with your video file path
+videoFile = 'testVideo.mkv'; % Replace with your video file path
 
 % Create a VideoReader object
 videoReader = VideoReader(videoFile);
@@ -13,7 +13,7 @@ videoWriter = VideoWriter(outputVideoFile, 'MPEG-4');
 open(videoWriter);
 
 % Initialize vehicle counts
-vehicleCounts = struct('Bus', 0, 'Car', 0, 'Motorbike', 0);
+vehicleCounts = struct('Bus', 0, 'Car', 0, 'Motorbike', 0,'CNG',0,'Rickshaw',0,'Truck',0);
 
 % Define scoreboard position and style
 scoreboardPosition = [10, 10]; % Top-left corner of the scoreboard
@@ -84,8 +84,8 @@ while hasFrame(videoReader)
     end
     
     % Update the scoreboard text
-    scoreboardText = sprintf('Bus: %d\nCar: %d\nMotorbike: %d', ...
-        vehicleCounts.Bus, vehicleCounts.Car, vehicleCounts.Motorbike);
+    scoreboardText = sprintf('Bus: %d\nCar: %d\nMotorbike: %d\nCNG: %d\nRickshaw: %d\nTruck: %d', ...
+        vehicleCounts.Bus, vehicleCounts.Car, vehicleCounts.Motorbike, vehicleCounts.CNG, vehicleCounts.Rickshaw, vehicleCounts.Truck);
     
     % Add the scoreboard to the frame
     frame = insertText(frame, scoreboardPosition, scoreboardText, ...
